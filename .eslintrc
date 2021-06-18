@@ -5,9 +5,23 @@
   },
   "extends": [
     "eslint:recommended",
-    "preact",
-    "prettier",
-    "prettier/@typescript-eslint"
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended",
+    "prettier/@typescript-eslint",
+    "preact"
+  ],
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "extends": [
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended",
+        "prettier/@typescript-eslint"
+      ],
+      "parser": "@typescript-eslint/parser",
+      "plugins": ["@typescript-eslint"]
+    }
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -17,11 +31,20 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
+  "plugins": ["@typescript-eslint"],
   "rules": {
     "array-bracket-newline": "warn",
     "arrow-body-style": "off",
     "camelcase": "error",
     "prefer-destructuring": "error",
-    "jsx-quotes": "warn"
+    "jsx-quotes": "warn",
+    "no-var": "error",
+    "semi": "error",
+    "indent": "error",
+    "no-multi-spaces": "error",
+    "space-in-parens": "error",
+    "no-multiple-empty-lines": "error",
+    "prefer-const": "error",
+    "no-use-before-define": "error"
   }
 }

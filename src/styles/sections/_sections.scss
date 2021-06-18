@@ -1,0 +1,21 @@
+section {
+  padding: 30px 40px;
+  border-radius: 12px;
+  background-color: $main-color;
+  margin-bottom: 30px;
+  position: relative;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: calc(100% - 24px);
+    height: calc(100% - 24px);
+    top: 10px;
+    left: 10px;
+    border: 2px dashed $secondary-color;
+    border-radius: 12px;
+    opacity: 0.5;
+  }
+}
