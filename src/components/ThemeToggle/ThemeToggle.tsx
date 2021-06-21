@@ -1,12 +1,21 @@
 export interface IThemeToggle {
-  onClick?: () => void;
+  onClick: (e: JSX.TargetedEvent<HTMLInputElement, Event>) => void;
+  checked: boolean;
 }
 
-const ThemeToggle = ({ onClick }: IThemeToggle): JSX.Element => {
+const ThemeToggle = ({
+  onClick,
+  checked = false,
+}: IThemeToggle): JSX.Element => {
+  const handleChange = (e: JSX.TargetedEvent<HTMLInputElement, Event>) => {
+    onClick(e);
+  };
   return (
-    <button type="button" onClick={onClick} className="button theme-toggle">
-      Toggle theme
-    </button>
+    <label className="label theme-toggle">
+      {checked ? 'Light Theme' : 'Dark Theme'}
+      <input type="checkbox" checked={checked} onChange={handleChange} />
+      <span />
+    </label>
   );
 };
 

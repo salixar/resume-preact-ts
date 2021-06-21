@@ -5,6 +5,12 @@ const config = {
     factory: 'h',
     fragment: 'Fragment',
   },
+  resolve: {
+    alias: {
+      react: 'preact/compat',
+      'react-dom': 'preact/compat',
+    },
+  },
   plugins: [preact()],
 };
 

@@ -1,19 +1,22 @@
 import { useEffect, useState } from 'preact/hooks';
+import Typing from 'react-typing-animation';
 
-import Navigation from './components/Navigation/Navigation';
-import ThemeToggle from './components/ThemeToggle/ThemeToggle';
+import Header from './sections/Header';
 
-// routes
+// sections
 import Home from './sections/Home';
 import Joke from './sections/Joke';
 
 export function App(): JSX.Element {
   const activeTheme = localStorage.getItem('theme') || 'dark';
+  const [isReady, setReady] = useState(false);
   const [theme, setTheme] = useState(activeTheme);
-  const handleTheme = (): void => {
+  const [checked, setChecked] = useState(false);
+  const handleTheme = (e: JSX.TargetedEvent<HTMLInputElement, Event>): void => {
     const currentTheme = theme === 'dark' ? 'light' : 'dark';
     setTheme(currentTheme);
     localStorage.setItem('theme', currentTheme);
+    setChecked(e.currentTarget.checked);
   };
   useEffect(() => {
     try {
@@ -22,18 +25,23 @@ export function App(): JSX.Element {
       setTheme('dark');
     }
   }, []);
+  if (!isReady) {
+    return (
+      <main className="start-screen">
+        <Typing>
+          <h1>Hello, I'm Arkady</h1>
+        </Typing>
+      </main>
+    );
+  }
   return (
     <div className="container" data-theme={theme}>
-      <svg viewBox="0 0 500 150" preserveAspectRatio="xMidYMax slice">
-        <path d="M0.00,92.27 C216.83,192.92 304.30,8.39 500.00,109.03 L500.00,0.00 L0.00,0.00 Z"></path>
-      </svg>
+      <Header handleTheme={handleTheme} checked={checked} />
       <div className="wrapper">
-        <Navigation />
         <main>
           <Home />
           <Joke />
         </main>
-        <ThemeToggle onClick={handleTheme} />
       </div>
     </div>
   );
